@@ -1,0 +1,80 @@
+{
+  "type": "object",
+  "properties": {
+    "orderId": {
+      "type": "string",
+      "description": "Stripe/store order ID"
+    },
+    "customerName": {
+      "type": "string"
+    },
+    "email": {
+      "type": "string"
+    },
+    "phone": {
+      "type": "string"
+    },
+    "shippingLine1": {
+      "type": "string"
+    },
+    "shippingLine2": {
+      "type": "string"
+    },
+    "shippingCity": {
+      "type": "string"
+    },
+    "shippingState": {
+      "type": "string"
+    },
+    "shippingPostalCode": {
+      "type": "string"
+    },
+    "shippingCountry": {
+      "type": "string"
+    },
+    "productSourceUrl": {
+      "type": "string",
+      "description": "MuleBuy/Taobao source URL to order from"
+    },
+    "productName": {
+      "type": "string"
+    },
+    "size": {
+      "type": "string"
+    },
+    "color": {
+      "type": "string"
+    },
+    "quantity": {
+      "type": "number"
+    },
+    "price": {
+      "type": "number",
+      "description": "Unit price in USD"
+    },
+    "totalLinePrice": {
+      "type": "number",
+      "description": "quantity * price"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "pending",
+        "processing",
+        "ordered",
+        "shipped",
+        "delivered",
+        "cancelled"
+      ],
+      "description": "Fulfillment status"
+    },
+    "trackingNumber": {
+      "type": "string"
+    },
+    "notes": {
+      "type": "string"
+    }
+  },
+  "required": [],
+  "name": "Order"
+}

@@ -4,8 +4,10 @@ import { getAllOrders } from '@/lib/orders-db';
 export async function GET() {
   try {
     const orders = getAllOrders();
-    return NextResponse.json(orders.sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()));
+    // Sort by newest first
+    orders.sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime());
+    return NextResponse.json(orders);
   } catch {
-    return NextResponse.json({ error: 'Failed to load orders' }, { status: 500 });
+    return NextResponse.json({ error: 'Failed to fetch orders' }, { status: 500 });
   }
 }
