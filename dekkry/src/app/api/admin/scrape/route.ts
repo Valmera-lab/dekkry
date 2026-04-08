@@ -76,7 +76,7 @@ export async function POST(req: NextRequest) {
       name: name.substring(0, 100),
       description: description.substring(0, 500),
       price: Math.round(price),
-      images: [...new Set(images)].slice(0, 8),
+      images: Array.from(new Set(images)).slice(0, 8),
       sizes: foundSizes.length > 0 ? foundSizes : ['S', 'M', 'L', 'XL'],
       colors: foundColors.length > 0 ? foundColors : ['Black'],
       sourceUrl: url,

@@ -43,9 +43,9 @@ export function Navbar() {
             <div className="flex items-center gap-4">
               <Link href="/cart" className="relative p-2 text-brand-gray-300 hover:text-brand-white transition-colors">
                 <ShoppingBag size={20} />
-                {totalItems() > 0 && (
+                {totalItems > 0 && (
                   <span className="absolute -top-1 -right-1 bg-brand-accent text-brand-black text-[10px] font-black w-4 h-4 rounded-full flex items-center justify-center">
-                    {totalItems()}
+                    {totalItems}
                   </span>
                 )}
               </Link>
