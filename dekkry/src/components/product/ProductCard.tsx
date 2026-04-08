@@ -5,12 +5,15 @@ import { Product } from '@/types';
 import { formatPrice } from '@/lib/utils';
 import { useState } from 'react';
 import { ShoppingBag } from 'lucide-react';
+import { StarRating } from './StarRating';
 
 interface Props {
   product: Product;
+  averageRating?: number;
+  reviewCount?: number;
 }
 
-export function ProductCard({ product }: Props) {
+export function ProductCard({ product, averageRating, reviewCount }: Props) {
   const [hovered, setHovered] = useState(false);
   const secondImg = product.images[1] || product.images[0];
 
@@ -50,6 +53,13 @@ export function ProductCard({ product }: Props) {
           <h3 className="text-xs font-semibold tracking-wider uppercase text-brand-gray-200 mb-1 line-clamp-1">
             {product.name}
           </h3>
+          {/* Rating */}
+          {averageRating !== undefined && reviewCount !== undefined && reviewCount > 0 && (
+            <div className="flex items-center gap-1.5 mb-1.5">
+              <StarRating rating={averageRating} size={11} />
+              <span className="text-[10px] text-brand-gray-500">({reviewCount})</span>
+            </div>
+          )}
           <div className="flex items-center justify-between">
             <span className="text-sm font-bold text-brand-white">
               {formatPrice(product.price)}

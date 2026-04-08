@@ -1,4 +1,5 @@
 import { getAllProducts } from '@/lib/products-db';
+import { getAverageRating, getReviewsByProduct } from '@/lib/reviews-db';
 import { ProductCard } from '@/components/product/ProductCard';
 import { Product } from '@/types';
 
@@ -72,7 +73,12 @@ export default function ProductsPage({ searchParams }: Props) {
       {products.length > 0 ? (
         <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6">
           {products.map((product) => (
-            <ProductCard key={product.id} product={product} />
+            <ProductCard
+              key={product.id}
+              product={product}
+              averageRating={getAverageRating(product.id)}
+              reviewCount={getReviewsByProduct(product.id).length}
+            />
           ))}
         </div>
       ) : (

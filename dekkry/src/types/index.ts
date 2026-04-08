@@ -61,3 +61,17 @@ export interface OrderItem {
   price: number;
   sourceUrl: string;
 }
+
+export interface Review {
+  id: string;
+  productId: string;
+  author: string;
+  location?: string;
+  rating: number; // 1-5
+  title: string;
+  body: string;
+  date: string;
+  verified: boolean;
+  size?: string;
+  color?: string;
+}

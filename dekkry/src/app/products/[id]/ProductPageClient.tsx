@@ -6,12 +6,15 @@ import { formatPrice, cn } from '@/lib/utils';
 import { useCartStore } from '@/lib/cart-store';
 import { ShoppingBag, Check } from 'lucide-react';
 import Link from 'next/link';
+import { StarRating } from '@/components/product/StarRating';
 
 interface Props {
   product: Product;
+  averageRating?: number;
+  reviewCount?: number;
 }
 
-export function ProductPageClient({ product }: Props) {
+export function ProductPageClient({ product, averageRating = 0, reviewCount = 0 }: Props) {
   const [selectedImage, setSelectedImage] = useState(0);
   const [selectedSize, setSelectedSize] = useState('');
   const [selectedColor, setSelectedColor] = useState(product.variants[0]?.color || '');
@@ -88,7 +91,21 @@ export function ProductPageClient({ product }: Props) {
           <div className="text-xs font-semibold tracking-[0.4em] text-brand-accent uppercase mb-2">
             {product.category}
           </div>
-          <h1 className="text-3xl sm:text-4xl font-black tracking-tight mb-4">{product.name}</h1>
+          <h1 className="text-3xl sm:text-4xl font-black tracking-tight mb-3">{product.name}</h1>
+
+          {/* Star rating */}
+          {reviewCount > 0 && (
+            <a
+              href="#reviews"
+              className="flex items-center gap-2 mb-4 group w-fit"
+            >
+              <StarRating rating={averageRating} size={16} />
+              <span className="text-xs text-brand-gray-400 group-hover:text-brand-white transition-colors">
+                {averageRating.toFixed(1)} · {reviewCount} review{reviewCount !== 1 ? 's' : ''}
+              </span>
+            </a>
+          )}
+
           <div className="text-3xl font-bold mb-6">{formatPrice(product.price)}</div>
 
           <p className="text-brand-gray-400 text-sm leading-relaxed mb-8">{product.description}</p>
@@ -172,6 +189,9 @@ export function ProductPageClient({ product }: Props) {
           </div>
         </div>
       </div>
+
+      {/* Reviews anchor */}
+      <div id="reviews" />
     </div>
   );
 }

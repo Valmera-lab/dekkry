@@ -1,4 +1,5 @@
 import { getAllProducts } from '@/lib/products-db';
+import { getAverageRating, getReviewsByProduct } from '@/lib/reviews-db';
 import { ProductCard } from '@/components/product/ProductCard';
 import Link from 'next/link';
 import { ArrowRight } from 'lucide-react';
@@ -16,7 +17,6 @@ export default function HomePage() {
     <div>
       {/* Hero */}
       <section className="relative min-h-[90vh] flex items-end pb-20 overflow-hidden">
-        {/* Background image */}
         {heroImage ? (
           <div className="absolute inset-0">
             <Image
@@ -85,7 +85,12 @@ export default function HomePage() {
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {featured.map((product) => (
-              <ProductCard key={product.id} product={product} />
+              <ProductCard
+                key={product.id}
+                product={product}
+                averageRating={getAverageRating(product.id)}
+                reviewCount={getReviewsByProduct(product.id).length}
+              />
             ))}
           </div>
         </section>
@@ -115,7 +120,12 @@ export default function HomePage() {
         </div>
         <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6">
           {latest.map((product) => (
-            <ProductCard key={product.id} product={product} />
+            <ProductCard
+              key={product.id}
+              product={product}
+              averageRating={getAverageRating(product.id)}
+              reviewCount={getReviewsByProduct(product.id).length}
+            />
           ))}
         </div>
       </section>
