@@ -26,55 +26,60 @@ export default function ProductsPage({ searchParams }: Props) {
 
   return (
     <div className="bg-brand-black min-h-screen">
-      <div className="max-w-7xl mx-auto px-6 sm:px-10 py-14">
 
-        {/* Header */}
-        <div className="mb-12 border-b border-brand-gray-800 pb-8">
-          <p className="text-[10px] font-semibold tracking-[0.4em] text-brand-gray-500 uppercase mb-3">SS25 Collection</p>
-          <h1 className="text-5xl sm:text-6xl font-black tracking-[-0.03em] leading-none text-brand-white">Shop</h1>
-        </div>
+      {/* Header — edge to edge */}
+      <div className="px-5 sm:px-8 pt-10 pb-8 border-b border-brand-gray-800">
+        <p className="text-[9px] font-black tracking-[0.5em] uppercase text-brand-gray-600 mb-3">SS25</p>
+        <h1
+          className="font-black tracking-[-0.04em] leading-none text-brand-white"
+          style={{ fontSize: 'clamp(52px, 12vw, 120px)' }}
+        >
+          Shop
+        </h1>
+      </div>
 
-        {/* Filters */}
-        <div className="flex flex-col sm:flex-row gap-4 mb-10 items-start sm:items-center justify-between">
-          <div className="flex flex-wrap gap-1.5">
-            {CATEGORIES.map((cat) => (
-              <a
-                key={cat}
-                href={`/products${cat !== 'all' ? `?category=${cat}` : ''}`}
-                className={`text-[10px] font-bold tracking-[0.25em] uppercase px-4 py-2 border transition-colors duration-200 ${
-                  category === cat
-                    ? 'border-brand-accent bg-brand-accent text-brand-black'
-                    : 'border-brand-gray-700 text-brand-gray-500 hover:border-brand-gray-500 hover:text-brand-white'
-                }`}
-              >
-                {cat}
-              </a>
-            ))}
-          </div>
-          <p className="text-[10px] text-brand-gray-600 tracking-widest uppercase">
-            {products.length} {products.length === 1 ? 'piece' : 'pieces'}
-          </p>
-        </div>
+      {/* Filters — tight, inline */}
+      <div className="px-5 sm:px-8 py-5 border-b border-brand-gray-800 flex items-center gap-1 overflow-x-auto no-scrollbar">
+        {CATEGORIES.map((cat) => (
+          <a
+            key={cat}
+            href={`/products${cat !== 'all' ? `?category=${cat}` : ''}`}
+            className={`flex-shrink-0 text-[9px] font-black tracking-[0.3em] uppercase px-4 py-2 transition-colors duration-150 ${
+              category === cat
+                ? 'bg-brand-accent text-brand-black'
+                : 'text-brand-gray-600 hover:text-brand-white'
+            }`}
+          >
+            {cat}
+          </a>
+        ))}
+        <span className="ml-auto pl-6 text-[9px] font-black tracking-[0.3em] uppercase text-brand-gray-700 flex-shrink-0">
+          {products.length} items
+        </span>
+      </div>
 
-        {/* Grid */}
-        {products.length > 0 ? (
-          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3 sm:gap-4">
-            {products.map((product, index) => (
+      {/* Grid — edge to edge, 1px gap creates the grid lines */}
+      {products.length > 0 ? (
+        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-px bg-brand-gray-800">
+          {products.map((product, index) => (
+            <div key={product.id} className="bg-brand-black">
               <ProductCard
-                key={product.id}
                 product={product}
                 averageRating={getAverageRating(product.id)}
                 reviewCount={getReviewsByProduct(product.id).length}
                 priority={index < 4}
+                variant="grid"
               />
-            ))}
-          </div>
-        ) : (
-          <div className="text-center py-24">
-            <p className="text-brand-gray-500">No pieces in this category yet.</p>
-          </div>
-        )}
-      </div>
+            </div>
+          ))}
+        </div>
+      ) : (
+        <div className="flex items-center justify-center py-32">
+          <p className="text-[10px] font-black tracking-[0.4em] uppercase text-brand-gray-700">
+            Nothing here yet
+          </p>
+        </div>
+      )}
     </div>
   );
 }
