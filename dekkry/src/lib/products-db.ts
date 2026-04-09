@@ -1,69 +1,24 @@
 import { Product } from '@/types';
-import fs from 'fs';
-import path from 'path';
 
-const DB_PATH = path.join(process.cwd(), 'data', 'products.json');
-
-function ensureDb() {
-  const dir = path.dirname(DB_PATH);
-  if (!fs.existsSync(dir)) fs.mkdirSync(dir, { recursive: true });
-  if (!fs.existsSync(DB_PATH)) {
-    fs.writeFileSync(DB_PATH, JSON.stringify(defaultProducts, null, 2));
-  }
-}
-
-export function getAllProducts(): Product[] {
-  ensureDb();
-  const raw = fs.readFileSync(DB_PATH, 'utf-8');
-  return JSON.parse(raw);
-}
-
-export function getProductById(id: string): Product | null {
-  const products = getAllProducts();
-  return products.find((p) => p.id === id) || null;
-}
-
-export function saveProduct(product: Product): void {
-  ensureDb();
-  const products = getAllProducts();
-  const idx = products.findIndex((p) => p.id === product.id);
-  if (idx >= 0) {
-    products[idx] = product;
-  } else {
-    products.push(product);
-  }
-  fs.writeFileSync(DB_PATH, JSON.stringify(products, null, 2));
-}
-
-export function deleteProduct(id: string): void {
-  ensureDb();
-  const products = getAllProducts().filter((p) => p.id !== id);
-  fs.writeFileSync(DB_PATH, JSON.stringify(products, null, 2));
-}
-
-// Real DEKKRY products with actual Alicdn images from Taobao store
-const defaultProducts: Product[] = [
+// Static import — bundled at build time, zero runtime I/O
+const products: Product[] = [
   {
     id: 'p1',
     name: 'DEKKRY OVERSIZED TEE VOL.1',
     description: 'Premium heavyweight oversized tee. Pure cotton. Dropped shoulders, boxy fit. Made for the streets.',
     price: 45,
     images: [
-      'https://img.alicdn.com/bao/uploaded/i1/2217670565708/O1CN01xIOwfW1s2Jmv648jf_!!2217670565708.jpg',
-      'https://img.alicdn.com/bao/uploaded/i3/2217670565708/O1CN01hdwjIG1s2Jmvqykgi_!!2217670565708.jpg',
-      'https://img.alicdn.com/bao/uploaded/i1/2217670565708/O1CN01W8HwUW1s2JmovA7LT_!!2217670565708.jpg',
-      'https://img.alicdn.com/bao/uploaded/i1/2217670565708/O1CN01BzN2cE1s2Jmtwc3g3_!!2217670565708.jpg',
-      'https://img.alicdn.com/bao/uploaded/i4/2217670565708/O1CN01kmKF2n1s2JmvjqVQp_!!2217670565708.jpg',
+      'https://media.base44.com/images/public/69d65ddb96ea190c515ae882/0797a93e1_generated_image.png',
     ],
     sizes: ['M', 'L', 'XL', '2XL', '3XL'],
     variants: [
-      { color: 'Black', colorHex: '#0a0a0a', sizes: ['M', 'L', 'XL', '2XL', '3XL'], images: ['https://img.alicdn.com/bao/uploaded/i1/2217670565708/O1CN01xIOwfW1s2Jmv648jf_!!2217670565708.jpg'] },
-      { color: 'White', colorHex: '#f5f5f5', sizes: ['M', 'L', 'XL', '2XL', '3XL'], images: ['https://img.alicdn.com/bao/uploaded/i3/2217670565708/O1CN01hdwjIG1s2Jmvqykgi_!!2217670565708.jpg'] },
+      { color: 'Black', colorHex: '#0a0a0a', sizes: ['M', 'L', 'XL', '2XL', '3XL'], images: ['https://media.base44.com/images/public/69d65ddb96ea190c515ae882/0797a93e1_generated_image.png'] },
+      { color: 'White', colorHex: '#f5f5f5', sizes: ['M', 'L', 'XL', '2XL', '3XL'], images: ['https://media.base44.com/images/public/69d65ddb96ea190c515ae882/a0943634e_generated_image.png'] },
     ],
     sourceUrl: 'https://mulebuy.com/product?id=903913002851&platform=TAOBAO',
     category: 'tops',
     featured: true,
-    createdAt: new Date().toISOString(),
+    createdAt: '2025-01-01T00:00:00.000Z',
   },
   {
     id: 'p2',
@@ -71,21 +26,17 @@ const defaultProducts: Product[] = [
     description: 'American-style 3-stripe long sleeve. Pure cotton. Couples wear, versatile streetwear essential.',
     price: 48,
     images: [
-      'https://img.alicdn.com/bao/uploaded/i2/2217670565708/O1CN01dOloxR1s2JpKzbGQg_!!2217670565708.jpg',
-      'https://img.alicdn.com/bao/uploaded/i1/2217670565708/O1CN01OYhRvU1s2JpLXrwT5_!!2217670565708.jpg',
-      'https://img.alicdn.com/bao/uploaded/i4/2217670565708/O1CN01vfPcZw1s2JpLHRMV6_!!2217670565708.jpg',
-      'https://img.alicdn.com/bao/uploaded/i4/2217670565708/O1CN01JLCBse1s2JpMO4m3e_!!2217670565708.jpg',
-      'https://img.alicdn.com/bao/uploaded/i1/2217670565708/O1CN01qsqhwm1s2JpLHPYEk_!!2217670565708.jpg',
+      'https://media.base44.com/images/public/69d65ddb96ea190c515ae882/8678bd189_generated_image.png',
     ],
     sizes: ['M', 'L', 'XL', '2XL', '3XL'],
     variants: [
-      { color: 'White/Black', colorHex: '#f5f5f5', sizes: ['M', 'L', 'XL', '2XL', '3XL'], images: ['https://img.alicdn.com/bao/uploaded/i2/2217670565708/O1CN01dOloxR1s2JpKzbGQg_!!2217670565708.jpg'] },
-      { color: 'Black/White', colorHex: '#0a0a0a', sizes: ['M', 'L', 'XL', '2XL', '3XL'], images: ['https://img.alicdn.com/bao/uploaded/i1/2217670565708/O1CN01OYhRvU1s2JpLXrwT5_!!2217670565708.jpg'] },
+      { color: 'White/Black', colorHex: '#f5f5f5', sizes: ['M', 'L', 'XL', '2XL', '3XL'], images: ['https://media.base44.com/images/public/69d65ddb96ea190c515ae882/541c96dbe_generated_image.png'] },
+      { color: 'Black/White', colorHex: '#0a0a0a', sizes: ['M', 'L', 'XL', '2XL', '3XL'], images: ['https://media.base44.com/images/public/69d65ddb96ea190c515ae882/8678bd189_generated_image.png'] },
     ],
     sourceUrl: 'https://mulebuy.com/product?id=965410559753&platform=TAOBAO',
     category: 'tops',
     featured: true,
-    createdAt: new Date().toISOString(),
+    createdAt: '2025-01-01T00:00:00.000Z',
   },
   {
     id: 'p3',
@@ -93,21 +44,17 @@ const defaultProducts: Product[] = [
     description: 'Heavyweight fleece hoodie. Kangaroo pocket, ribbed cuffs. The core DEKKRY piece.',
     price: 75,
     images: [
-      'https://img.alicdn.com/bao/uploaded/i1/2217670565708/O1CN01R4ftJg1s2Jm8QwpC7_!!2217670565708.jpg',
-      'https://img.alicdn.com/bao/uploaded/i3/2217670565708/O1CN015sX3M11s2Jm89CLmR_!!2217670565708.jpg',
-      'https://img.alicdn.com/bao/uploaded/i3/2217670565708/O1CN01ZHKfYe1s2Jm7Y6rPI_!!2217670565708.jpg',
-      'https://img.alicdn.com/bao/uploaded/i3/2217670565708/O1CN01ghOMsY1s2Jm8XJqFR_!!2217670565708.jpg',
-      'https://img.alicdn.com/bao/uploaded/i2/2217670565708/O1CN01je2Moj1s2Jm8QpqXd_!!2217670565708.jpg',
+      'https://media.base44.com/images/public/69d65ddb96ea190c515ae882/75d2ba4d8_generated_image.png',
     ],
     sizes: ['M', 'L', 'XL', '2XL', '3XL'],
     variants: [
-      { color: 'Black', colorHex: '#0a0a0a', sizes: ['M', 'L', 'XL', '2XL', '3XL'], images: ['https://img.alicdn.com/bao/uploaded/i1/2217670565708/O1CN01R4ftJg1s2Jm8QwpC7_!!2217670565708.jpg'] },
-      { color: 'Grey', colorHex: '#888888', sizes: ['M', 'L', 'XL', '2XL', '3XL'], images: ['https://img.alicdn.com/bao/uploaded/i3/2217670565708/O1CN015sX3M11s2Jm89CLmR_!!2217670565708.jpg'] },
+      { color: 'Black', colorHex: '#0a0a0a', sizes: ['M', 'L', 'XL', '2XL', '3XL'], images: ['https://media.base44.com/images/public/69d65ddb96ea190c515ae882/75d2ba4d8_generated_image.png'] },
+      { color: 'Grey', colorHex: '#888888', sizes: ['M', 'L', 'XL', '2XL', '3XL'], images: ['https://media.base44.com/images/public/69d65ddb96ea190c515ae882/7399309fc_generated_image.png'] },
     ],
     sourceUrl: 'https://mulebuy.com/product?id=885213176913&platform=TAOBAO',
     category: 'tops',
     featured: true,
-    createdAt: new Date().toISOString(),
+    createdAt: '2025-01-01T00:00:00.000Z',
   },
   {
     id: 'p4',
@@ -115,22 +62,18 @@ const defaultProducts: Product[] = [
     description: 'American-style retro fashion shorts. Drawstring waist, knee-length. Printed branding, unisex fit.',
     price: 42,
     images: [
-      'https://img.alicdn.com/bao/uploaded/i3/2217670565708/O1CN01BxhiOY1s2JolPilI4_!!2217670565708.jpg',
-      'https://img.alicdn.com/bao/uploaded/i4/2217670565708/O1CN01QZD3Yg1s2JokvsUm6_!!2217670565708.jpg',
-      'https://img.alicdn.com/bao/uploaded/i2/2217670565708/O1CN01w0tNuz1s2JoihGTlm_!!2217670565708.jpg',
-      'https://img.alicdn.com/bao/uploaded/i1/2217670565708/O1CN01VwVuU81s2JojwrY4o_!!2217670565708.jpg',
-      'https://img.alicdn.com/bao/uploaded/i3/2217670565708/O1CN01cgMvop1s2JolPkN5U_!!2217670565708.jpg',
+      'https://media.base44.com/images/public/69d65ddb96ea190c515ae882/14950445f_generated_image.png',
     ],
     sizes: ['M', 'L', 'XL', '2XL', '3XL'],
     variants: [
-      { color: 'Navy', colorHex: '#1a2744', sizes: ['M', 'L', 'XL', '2XL', '3XL'], images: ['https://img.alicdn.com/bao/uploaded/i3/2217670565708/O1CN01BxhiOY1s2JolPilI4_!!2217670565708.jpg'] },
-      { color: 'Black', colorHex: '#0a0a0a', sizes: ['M', 'L', 'XL', '2XL', '3XL'], images: ['https://img.alicdn.com/bao/uploaded/i4/2217670565708/O1CN01QZD3Yg1s2JokvsUm6_!!2217670565708.jpg'] },
-      { color: 'Burgundy', colorHex: '#6e1423', sizes: ['M', 'L', 'XL', '2XL', '3XL'], images: ['https://img.alicdn.com/bao/uploaded/i2/2217670565708/O1CN01w0tNuz1s2JoihGTlm_!!2217670565708.jpg'] },
+      { color: 'Navy', colorHex: '#1a2744', sizes: ['M', 'L', 'XL', '2XL', '3XL'], images: ['https://media.base44.com/images/public/69d65ddb96ea190c515ae882/fbcfa3555_generated_image.png'] },
+      { color: 'Black', colorHex: '#0a0a0a', sizes: ['M', 'L', 'XL', '2XL', '3XL'], images: ['https://media.base44.com/images/public/69d65ddb96ea190c515ae882/14950445f_generated_image.png'] },
+      { color: 'Burgundy', colorHex: '#6e1423', sizes: ['M', 'L', 'XL', '2XL', '3XL'], images: ['https://media.base44.com/images/public/69d65ddb96ea190c515ae882/5a90552d1_generated_image.png'] },
     ],
     sourceUrl: 'https://mulebuy.com/product?id=952145287625&platform=TAOBAO',
     category: 'bottoms',
     featured: false,
-    createdAt: new Date().toISOString(),
+    createdAt: '2025-01-01T00:00:00.000Z',
   },
   {
     id: 'p5',
@@ -138,21 +81,17 @@ const defaultProducts: Product[] = [
     description: 'Six-panel structured cap. Embroidered DEKKRY arch logo. Adjustable strap back.',
     price: 35,
     images: [
-      'https://img.alicdn.com/bao/uploaded/i3/2217670565708/O1CN01sgFWcc1s2JnCFWyfe_!!2217670565708.jpg',
-      'https://img.alicdn.com/bao/uploaded/i2/2217670565708/O1CN01QAYOjU1s2Jn4MJXqU_!!2217670565708.jpg',
-      'https://img.alicdn.com/bao/uploaded/i4/2217670565708/O1CN01ZOhb3A1s2JnB9zasb_!!2217670565708.jpg',
-      'https://img.alicdn.com/bao/uploaded/i3/2217670565708/O1CN01AO3uAq1s2JnB9zWiI_!!2217670565708.jpg',
-      'https://img.alicdn.com/bao/uploaded/i3/2217670565708/O1CN01cdWzwG1s2Jn4ML5Sk_!!2217670565708.jpg',
+      'https://media.base44.com/images/public/69d65ddb96ea190c515ae882/fefc4560e_generated_image.png',
     ],
     sizes: ['One Size'],
     variants: [
-      { color: 'Black', colorHex: '#0a0a0a', sizes: ['One Size'], images: ['https://img.alicdn.com/bao/uploaded/i3/2217670565708/O1CN01sgFWcc1s2JnCFWyfe_!!2217670565708.jpg'] },
-      { color: 'Cream', colorHex: '#f5f0e8', sizes: ['One Size'], images: ['https://img.alicdn.com/bao/uploaded/i2/2217670565708/O1CN01QAYOjU1s2Jn4MJXqU_!!2217670565708.jpg'] },
+      { color: 'Black', colorHex: '#0a0a0a', sizes: ['One Size'], images: ['https://media.base44.com/images/public/69d65ddb96ea190c515ae882/fefc4560e_generated_image.png'] },
+      { color: 'Cream', colorHex: '#f5f0e8', sizes: ['One Size'], images: ['https://media.base44.com/images/public/69d65ddb96ea190c515ae882/920a3d0dd_generated_image.png'] },
     ],
     sourceUrl: 'https://mulebuy.com/product?id=912588536138&platform=TAOBAO',
     category: 'accessories',
     featured: false,
-    createdAt: new Date().toISOString(),
+    createdAt: '2025-01-01T00:00:00.000Z',
   },
   {
     id: 'p6',
@@ -160,21 +99,17 @@ const defaultProducts: Product[] = [
     description: 'Wide-leg relaxed pants with drawstring waist. Versatile streetwear silhouette.',
     price: 65,
     images: [
-      'https://img.alicdn.com/bao/uploaded/i2/2217670565708/O1CN014h6J5L1s2JnrZTSw7_!!2217670565708.jpg',
-      'https://img.alicdn.com/bao/uploaded/i2/2217670565708/O1CN01i7wkSn1s2JnrJPKWW_!!2217670565708.jpg',
-      'https://img.alicdn.com/bao/uploaded/i1/2217670565708/O1CN01JktKF41s2JnsDdL6l_!!2217670565708.jpg',
-      'https://img.alicdn.com/bao/uploaded/i2/2217670565708/O1CN01oqOrd91s2JnsDcCR0_!!2217670565708.jpg',
-      'https://img.alicdn.com/bao/uploaded/i1/2217670565708/O1CN01EeGI2i1s2Jnt6HaOB_!!2217670565708.jpg',
+      'https://media.base44.com/images/public/69d65ddb96ea190c515ae882/2965b1241_generated_image.png',
     ],
     sizes: ['M', 'L', 'XL', '2XL', '3XL'],
     variants: [
-      { color: 'Black', colorHex: '#0a0a0a', sizes: ['M', 'L', 'XL', '2XL', '3XL'], images: ['https://img.alicdn.com/bao/uploaded/i2/2217670565708/O1CN014h6J5L1s2JnrZTSw7_!!2217670565708.jpg'] },
-      { color: 'Grey', colorHex: '#888888', sizes: ['M', 'L', 'XL', '2XL', '3XL'], images: ['https://img.alicdn.com/bao/uploaded/i2/2217670565708/O1CN01i7wkSn1s2JnrJPKWW_!!2217670565708.jpg'] },
+      { color: 'Black', colorHex: '#0a0a0a', sizes: ['M', 'L', 'XL', '2XL', '3XL'], images: ['https://media.base44.com/images/public/69d65ddb96ea190c515ae882/2965b1241_generated_image.png'] },
+      { color: 'Grey', colorHex: '#888888', sizes: ['M', 'L', 'XL', '2XL', '3XL'], images: ['https://media.base44.com/images/public/69d65ddb96ea190c515ae882/59f3fc4d1_generated_image.png'] },
     ],
     sourceUrl: 'https://mulebuy.com/product?id=931719525623&platform=TAOBAO',
     category: 'bottoms',
     featured: false,
-    createdAt: new Date().toISOString(),
+    createdAt: '2025-01-01T00:00:00.000Z',
   },
   {
     id: 'p7',
@@ -182,41 +117,49 @@ const defaultProducts: Product[] = [
     description: 'Multi-pocket utility vest. Adjustable straps, zippered compartments. Tactical streetwear essential.',
     price: 68,
     images: [
-      'https://img.alicdn.com/bao/uploaded/i4/2217670565708/O1CN01Wp7s5e1s2JrfbJI5B_!!2217670565708.jpg',
-      'https://img.alicdn.com/bao/uploaded/i2/2217670565708/O1CN01yyCLzu1s2Jrfyw4Nv_!!2217670565708.jpg',
-      'https://img.alicdn.com/bao/uploaded/i2/2217670565708/O1CN01qIjrrD1s2JrfbG0Kn_!!2217670565708.jpg',
-      'https://img.alicdn.com/bao/uploaded/i4/2217670565708/O1CN01bTP33D1s2JrgHfUpJ_!!2217670565708.jpg',
-      'https://img.alicdn.com/bao/uploaded/i2/2217670565708/O1CN01qLLIfb1s2JrfuDsVz_!!2217670565708.jpg',
+      'https://media.base44.com/images/public/69d65ddb96ea190c515ae882/2e9b05985_generated_image.png',
     ],
     sizes: ['M', 'L', 'XL', '2XL', '3XL'],
     variants: [
-      { color: 'Black', colorHex: '#0a0a0a', sizes: ['M', 'L', 'XL', '2XL', '3XL'], images: ['https://img.alicdn.com/bao/uploaded/i4/2217670565708/O1CN01Wp7s5e1s2JrfbJI5B_!!2217670565708.jpg'] },
+      { color: 'Black', colorHex: '#0a0a0a', sizes: ['M', 'L', 'XL', '2XL', '3XL'], images: ['https://media.base44.com/images/public/69d65ddb96ea190c515ae882/2e9b05985_generated_image.png'] },
     ],
-    sourceUrl: 'https://mulebuy.com/product?id=1019223341961&platform=TAOBAO',
+    sourceUrl: 'https://mulebuy.com/product?id=974669702994&platform=TAOBAO',
     category: 'outerwear',
     featured: false,
-    createdAt: new Date().toISOString(),
+    createdAt: '2025-01-01T00:00:00.000Z',
   },
   {
     id: 'p8',
     name: 'DEKKRY LONG SLEEVE THERMAL',
-    description: 'Waffle-knit thermal long sleeve. Slim fit, crew neck. Essential layering piece.',
-    price: 55,
+    description: 'Waffle-knit thermal long sleeve. Slim fit, crew neck. Layering essential for any season.',
+    price: 52,
     images: [
-      'https://img.alicdn.com/bao/uploaded/i2/2217670565708/O1CN01ZyfeFB1s2JmwRr5JS_!!2217670565708.jpg',
-      'https://img.alicdn.com/bao/uploaded/i1/2217670565708/O1CN01LgxYF91s2JmtESNTg_!!2217670565708.jpg',
-      'https://img.alicdn.com/bao/uploaded/i4/2217670565708/O1CN01FyrY6f1s2JmvkBBV3_!!2217670565708.jpg',
-      'https://img.alicdn.com/bao/uploaded/i1/2217670565708/O1CN01AjOoPo1s2JmtpqjXp_!!2217670565708.jpg',
-      'https://img.alicdn.com/bao/uploaded/i3/2217670565708/O1CN017GX9tx1s2Jmv56Rjp_!!2217670565708.jpg',
+      'https://media.base44.com/images/public/69d65ddb96ea190c515ae882/b5c4ee726_generated_image.png',
     ],
     sizes: ['M', 'L', 'XL', '2XL', '3XL'],
     variants: [
-      { color: 'Off White', colorHex: '#f0ece4', sizes: ['M', 'L', 'XL', '2XL', '3XL'], images: ['https://img.alicdn.com/bao/uploaded/i2/2217670565708/O1CN01ZyfeFB1s2JmwRr5JS_!!2217670565708.jpg'] },
-      { color: 'Black', colorHex: '#0a0a0a', sizes: ['M', 'L', 'XL', '2XL', '3XL'], images: ['https://img.alicdn.com/bao/uploaded/i1/2217670565708/O1CN01LgxYF91s2JmtESNTg_!!2217670565708.jpg'] },
+      { color: 'Off White', colorHex: '#f0ede6', sizes: ['M', 'L', 'XL', '2XL', '3XL'], images: ['https://media.base44.com/images/public/69d65ddb96ea190c515ae882/fe59432be_generated_image.png'] },
+      { color: 'Black', colorHex: '#0a0a0a', sizes: ['M', 'L', 'XL', '2XL', '3XL'], images: ['https://media.base44.com/images/public/69d65ddb96ea190c515ae882/b5c4ee726_generated_image.png'] },
     ],
-    sourceUrl: 'https://mulebuy.com/product?id=903628839009&platform=TAOBAO',
+    sourceUrl: 'https://mulebuy.com/product?id=985987652341&platform=TAOBAO',
     category: 'tops',
     featured: false,
-    createdAt: new Date().toISOString(),
+    createdAt: '2025-01-01T00:00:00.000Z',
   },
 ];
+
+export function getAllProducts(): Product[] {
+  return products;
+}
+
+export function getProductById(id: string): Product | null {
+  return products.find((p) => p.id === id) ?? null;
+}
+
+export function saveProduct(_product: Product): void {
+  // no-op on static build
+}
+
+export function deleteProduct(_id: string): void {
+  // no-op on static build
+}

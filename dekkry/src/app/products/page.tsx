@@ -3,7 +3,7 @@ import { getAverageRating, getReviewsByProduct } from '@/lib/reviews-db';
 import { ProductCard } from '@/components/product/ProductCard';
 import { Product } from '@/types';
 
-export const revalidate = 60;
+export const revalidate = 3600;
 
 const CATEGORIES = ['all', 'tops', 'bottoms', 'outerwear', 'accessories'];
 
@@ -25,54 +25,40 @@ export default function ProductsPage({ searchParams }: Props) {
   else if (sort === 'price-desc') products.sort((a, b) => b.price - a.price);
 
   return (
-    <div className="bg-brand-cream min-h-screen">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+    <div className="bg-brand-black min-h-screen">
+      <div className="max-w-7xl mx-auto px-6 sm:px-10 py-14">
+
         {/* Header */}
-        <div className="mb-10">
-          <div className="text-xs font-semibold tracking-[0.4em] text-brand-gray-400 uppercase mb-2">Catalogue</div>
-          <h1 className="text-5xl font-black tracking-tight text-brand-black">Shop</h1>
+        <div className="mb-12 border-b border-brand-gray-800 pb-8">
+          <p className="text-[10px] font-semibold tracking-[0.4em] text-brand-gray-500 uppercase mb-3">SS25 Collection</p>
+          <h1 className="text-5xl sm:text-6xl font-black tracking-[-0.03em] leading-none text-brand-white">Shop</h1>
         </div>
 
         {/* Filters */}
         <div className="flex flex-col sm:flex-row gap-4 mb-10 items-start sm:items-center justify-between">
-          <div className="flex flex-wrap gap-2">
+          <div className="flex flex-wrap gap-1.5">
             {CATEGORIES.map((cat) => (
               <a
                 key={cat}
                 href={`/products${cat !== 'all' ? `?category=${cat}` : ''}`}
-                className={`text-xs font-semibold tracking-widest uppercase px-4 py-2 border transition-colors duration-200 ${
+                className={`text-[10px] font-bold tracking-[0.25em] uppercase px-4 py-2 border transition-colors duration-200 ${
                   category === cat
-                    ? 'border-brand-black bg-brand-black text-brand-cream'
-                    : 'border-brand-gray-300 text-brand-gray-500 hover:border-brand-black hover:text-brand-black'
+                    ? 'border-brand-accent bg-brand-accent text-brand-black'
+                    : 'border-brand-gray-700 text-brand-gray-500 hover:border-brand-gray-500 hover:text-brand-white'
                 }`}
               >
                 {cat}
               </a>
             ))}
           </div>
-          <select
-            className="bg-brand-cream border border-brand-gray-300 text-brand-gray-500 text-xs font-semibold tracking-wider uppercase px-4 py-2 focus:outline-none"
-            defaultValue={sort}
-            onChange={(e) => {
-              const url = new URL(window.location.href);
-              url.searchParams.set('sort', e.target.value);
-              window.location.href = url.toString();
-            }}
-          >
-            <option value="newest">Newest</option>
-            <option value="price-asc">Price: Low to High</option>
-            <option value="price-desc">Price: High to Low</option>
-          </select>
+          <p className="text-[10px] text-brand-gray-600 tracking-widest uppercase">
+            {products.length} {products.length === 1 ? 'piece' : 'pieces'}
+          </p>
         </div>
-
-        {/* Count */}
-        <p className="text-xs text-brand-gray-400 mb-6">
-          {products.length} {products.length === 1 ? 'piece' : 'pieces'}
-        </p>
 
         {/* Grid */}
         {products.length > 0 ? (
-          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6">
+          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3 sm:gap-4">
             {products.map((product, index) => (
               <ProductCard
                 key={product.id}
@@ -84,8 +70,8 @@ export default function ProductsPage({ searchParams }: Props) {
             ))}
           </div>
         ) : (
-          <div className="text-center py-20">
-            <p className="text-brand-gray-400 text-lg">No pieces in this category yet.</p>
+          <div className="text-center py-24">
+            <p className="text-brand-gray-500">No pieces in this category yet.</p>
           </div>
         )}
       </div>
