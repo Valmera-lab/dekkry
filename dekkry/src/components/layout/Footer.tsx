@@ -3,49 +3,45 @@ import Link from 'next/link';
 export function Footer() {
   return (
     <footer className="border-t border-brand-gray-800 bg-brand-black">
-      <div className="max-w-7xl mx-auto px-6 sm:px-10 py-12">
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-10 mb-12">
-          <div className="col-span-2 md:col-span-1">
-            <div className="text-xl font-black tracking-[0.2em] text-brand-white mb-3">DEKKRY</div>
-            <p className="text-xs text-brand-gray-500 leading-relaxed max-w-[180px]">
-              Clean cuts. Raw energy. Built for the streets.
-            </p>
-          </div>
+      <div className="px-5 sm:px-8 py-10">
+        <div className="flex flex-col sm:flex-row items-start sm:items-end justify-between gap-8">
+          {/* Left */}
           <div>
-            <div className="text-[9px] font-bold tracking-[0.35em] uppercase text-brand-gray-600 mb-4">Shop</div>
-            <div className="flex flex-col gap-2.5">
+            <p className="font-black text-[13px] tracking-[0.18em] text-brand-white uppercase mb-4">DEKKRY</p>
+            <div className="flex flex-col gap-2">
               {[
-                { label: 'All Products', href: '/products' },
-                { label: 'Tops', href: '/products?category=tops' },
-                { label: 'Bottoms', href: '/products?category=bottoms' },
-                { label: 'Outerwear', href: '/products?category=outerwear' },
-                { label: 'Accessories', href: '/products?category=accessories' },
-              ].map((item) => (
-                <Link key={item.label} href={item.href} className="text-xs text-brand-gray-500 hover:text-brand-white transition-colors">
-                  {item.label}
+                { href: '/products', label: 'Shop' },
+                { href: '/about', label: 'About' },
+                { href: '/shipping', label: 'Shipping' },
+                { href: '/cart', label: 'Bag' },
+              ].map((l) => (
+                <Link
+                  key={l.href}
+                  href={l.href}
+                  className="font-bold text-[9px] tracking-[0.35em] uppercase text-brand-gray-600 hover:text-brand-white transition-colors w-fit"
+                >
+                  {l.label}
                 </Link>
               ))}
             </div>
           </div>
-          <div>
-            <div className="text-[9px] font-bold tracking-[0.35em] uppercase text-brand-gray-600 mb-4">Info</div>
-            <div className="flex flex-col gap-2.5">
-              <Link href="/about" className="text-xs text-brand-gray-500 hover:text-brand-white transition-colors">About Us</Link>
-              <Link href="/shipping" className="text-xs text-brand-gray-500 hover:text-brand-white transition-colors">Shipping</Link>
-            </div>
-          </div>
-          <div>
-            <div className="text-[9px] font-bold tracking-[0.35em] uppercase text-brand-gray-600 mb-4">Brand</div>
-            <p className="text-xs text-brand-gray-500 leading-relaxed">
-              SS25 Collection<br />
-              Premium Streetwear
-            </p>
-          </div>
+
+          {/* Right — big muted type */}
+          <p
+            className="font-black tracking-[-0.04em] leading-none text-brand-gray-800 select-none text-right"
+            style={{ fontSize: 'clamp(40px, 8vw, 96px)' }}
+          >
+            SS25
+          </p>
         </div>
 
-        <div className="border-t border-brand-gray-800 pt-6 flex flex-col sm:flex-row items-center justify-between gap-2">
-          <p className="text-[10px] text-brand-gray-700">© 2025 DEKKRY. All rights reserved.</p>
-          <p className="text-[10px] text-brand-gray-700 tracking-widest uppercase">Made with precision.</p>
+        <div className="border-t border-brand-gray-800 mt-8 pt-5 flex items-center justify-between">
+          <p className="font-bold text-[8px] tracking-[0.4em] uppercase text-brand-gray-800">
+            © 2025 DEKKRY
+          </p>
+          <p className="font-bold text-[8px] tracking-[0.4em] uppercase text-brand-gray-800">
+            Ships Worldwide
+          </p>
         </div>
       </div>
     </footer>

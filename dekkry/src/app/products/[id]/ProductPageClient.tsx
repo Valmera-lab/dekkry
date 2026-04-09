@@ -21,18 +21,16 @@ export function ProductPageClient({ product, averageRating = 0, reviewCount = 0 
   const [error, setError] = useState('');
   const addItem = useCartStore((s) => s.addItem);
 
-  const currentVariant = product.variants.find((v) => v.color === selectedColor) || product.variants[0];
-  const displayImages = (currentVariant?.images && currentVariant.images.length > 0)
-    ? currentVariant.images
-    : product.images;
+  const currentVariant = product.variants.find((v) => v.color === selectedColor) ?? product.variants[0];
+  const imgs = (currentVariant?.images?.length) ? currentVariant.images : product.images;
 
-  function handleAddToCart() {
-    if (!selectedSize) { setError('Pick a size'); return; }
+  function handleAdd() {
+    if (!selectedSize) { setError('Select a size'); return; }
     setError('');
     addItem({
       productId: product.id,
       productName: product.name,
-      productImage: displayImages[0],
+      productImage: imgs[0],
       price: product.price,
       size: selectedSize,
       color: selectedColor,
@@ -40,137 +38,157 @@ export function ProductPageClient({ product, averageRating = 0, reviewCount = 0 
       sourceUrl: product.sourceUrl,
     });
     setAdded(true);
-    setTimeout(() => setAdded(false), 2000);
+    setTimeout(() => setAdded(false), 2200);
   }
 
   return (
     <div className="bg-brand-black min-h-screen">
 
-      {/* Breadcrumb */}
-      <div className="px-5 sm:px-8 pt-6 pb-4 border-b border-brand-gray-800">
-        <nav className="flex items-center gap-2 text-[9px] font-black tracking-[0.3em] uppercase text-brand-gray-700">
+      {/* Breadcrumb — dead simple */}
+      <div className="px-5 sm:px-8 py-3 border-b border-brand-gray-800">
+        <div className="flex items-center gap-2 font-bold text-[8px] tracking-[0.35em] uppercase text-brand-gray-700">
           <Link href="/" className="hover:text-brand-white transition-colors">Home</Link>
           <span>/</span>
           <Link href="/products" className="hover:text-brand-white transition-colors">Shop</Link>
           <span>/</span>
-          <span className="text-brand-gray-500">{product.name}</span>
-        </nav>
+          <span className="text-brand-gray-600">{product.category}</span>
+        </div>
       </div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-2">
+      {/* Split layout — full height on desktop */}
+      <div className="lg:grid lg:grid-cols-2 lg:min-h-[calc(100vh-44px)]">
 
-        {/* IMAGE SIDE */}
-        <div className="relative">
-          <div className="relative w-full aspect-[3/4] bg-brand-gray-900">
-            <Image
-              src={displayImages[selectedImage] || displayImages[0]}
-              alt={product.name}
-              fill
-              className="object-cover"
-              sizes="(max-width: 1024px) 100vw, 50vw"
-              priority
-            />
-          </div>
-          {displayImages.length > 1 && (
-            <div className="absolute bottom-0 left-0 right-0 flex gap-1 p-2 bg-gradient-to-t from-brand-black/80 to-transparent">
-              {displayImages.map((img, i) => (
+        {/* LEFT: photo — full bleed, no padding at all */}
+        <div className="relative bg-brand-gray-900 aspect-[3/4] lg:aspect-auto lg:h-full">
+          <Image
+            src={imgs[selectedImage] ?? imgs[0]}
+            alt={product.name}
+            fill
+            className="object-cover"
+            sizes="(max-width:1024px) 100vw, 50vw"
+            priority
+          />
+
+          {/* Thumbnails overlaid at bottom */}
+          {imgs.length > 1 && (
+            <div className="absolute bottom-3 left-3 flex gap-1.5">
+              {imgs.map((img, i) => (
                 <button
                   key={i}
                   onClick={() => setSelectedImage(i)}
                   className={cn(
-                    'relative flex-shrink-0 w-12 h-14 overflow-hidden transition-all duration-200',
-                    selectedImage === i ? 'ring-1 ring-brand-accent opacity-100' : 'opacity-40 hover:opacity-70'
+                    'relative w-10 h-12 overflow-hidden flex-shrink-0 transition-opacity duration-200',
+                    selectedImage === i ? 'opacity-100 ring-1 ring-brand-lime' : 'opacity-35 hover:opacity-65'
                   )}
                 >
-                  <Image src={img} alt="" fill className="object-cover" sizes="48px" loading="lazy" />
+                  <Image src={img} alt="" fill className="object-cover" sizes="40px" loading="lazy" />
                 </button>
               ))}
             </div>
           )}
         </div>
 
-        {/* INFO SIDE */}
-        <div className="px-6 sm:px-10 py-10 flex flex-col gap-6">
-          <span className="text-[9px] font-black tracking-[0.5em] uppercase text-brand-gray-600">{product.category}</span>
+        {/* RIGHT: info — clean, no boxes */}
+        <div className="px-6 sm:px-10 py-10 flex flex-col gap-5">
 
-          <div>
-            <h1
-              className="font-black tracking-[-0.03em] leading-none text-brand-white"
-              style={{ fontSize: 'clamp(32px, 5vw, 56px)' }}
-            >
-              {product.name}
-            </h1>
-            {reviewCount > 0 && (
-              <a href="#reviews" className="flex items-center gap-2 mt-3 w-fit group">
-                <StarRating rating={averageRating} size={12} />
-                <span className="text-[10px] text-brand-gray-600 group-hover:text-brand-white transition-colors">
-                  {averageRating.toFixed(1)} ({reviewCount})
-                </span>
-              </a>
-            )}
-          </div>
+          {/* Category */}
+          <span className="font-bold text-[8px] tracking-[0.6em] uppercase text-brand-gray-600">
+            {product.category}
+          </span>
 
-          <p className="text-4xl font-black text-brand-white tracking-tight">{formatPrice(product.price)}</p>
-          <p className="text-xs text-brand-gray-500 leading-relaxed max-w-sm">{product.description}</p>
+          {/* Name */}
+          <h1
+            className="font-black tracking-[-0.03em] leading-none text-brand-white"
+            style={{ fontSize: 'clamp(28px, 4.5vw, 54px)' }}
+          >
+            {product.name}
+          </h1>
 
+          {/* Rating */}
+          {reviewCount > 0 && (
+            <a href="#reviews" className="flex items-center gap-2 group w-fit">
+              <StarRating rating={averageRating} size={11} />
+              <span className="font-bold text-[9px] tracking-wide text-brand-gray-600 group-hover:text-brand-white transition-colors">
+                {averageRating.toFixed(1)} · {reviewCount} reviews
+              </span>
+            </a>
+          )}
+
+          {/* Price */}
+          <p className="font-black text-3xl text-brand-white tracking-tight">{formatPrice(product.price)}</p>
+
+          {/* Description */}
+          <p className="text-[11px] text-brand-gray-500 leading-relaxed max-w-sm">{product.description}</p>
+
+          {/* Divider */}
+          <div className="h-px bg-brand-gray-800" />
+
+          {/* Colour */}
           {product.variants.length > 1 && (
             <div>
-              <p className="text-[9px] font-black tracking-[0.4em] uppercase text-brand-gray-600 mb-3">
+              <p className="font-bold text-[8px] tracking-[0.5em] uppercase text-brand-gray-600 mb-3">
                 Colour — <span className="text-brand-white">{selectedColor}</span>
               </p>
               <div className="flex gap-2">
                 {product.variants.map((v) => (
                   <button
                     key={v.color}
-                    onClick={() => { setSelectedColor(v.color); setSelectedImage(0); }}
                     title={v.color}
+                    onClick={() => { setSelectedColor(v.color); setSelectedImage(0); }}
                     className={cn(
-                      'w-7 h-7 rounded-full border-2 transition-all duration-200',
-                      selectedColor === v.color ? 'border-brand-accent scale-110' : 'border-brand-gray-700 hover:border-brand-gray-500'
+                      'w-6 h-6 rounded-full border-2 transition-all',
+                      selectedColor === v.color
+                        ? 'border-brand-lime scale-110'
+                        : 'border-brand-gray-700 hover:border-brand-gray-500'
                     )}
-                    style={{ backgroundColor: v.colorHex || '#444' }}
+                    style={{ backgroundColor: v.colorHex ?? '#555' }}
                   />
                 ))}
               </div>
             </div>
           )}
 
+          {/* Size */}
           <div>
-            <p className="text-[9px] font-black tracking-[0.4em] uppercase text-brand-gray-600 mb-3">
+            <p className="font-bold text-[8px] tracking-[0.5em] uppercase text-brand-gray-600 mb-3">
               Size {selectedSize && <span className="text-brand-white">— {selectedSize}</span>}
             </p>
             <div className="flex flex-wrap gap-1.5">
-              {product.sizes.map((size) => (
+              {product.sizes.map((sz) => (
                 <button
-                  key={size}
-                  onClick={() => { setSelectedSize(size); setError(''); }}
+                  key={sz}
+                  onClick={() => { setSelectedSize(sz); setError(''); }}
                   className={cn(
-                    'min-w-[48px] h-9 text-[9px] font-black tracking-[0.2em] uppercase border transition-all duration-150',
-                    selectedSize === size
-                      ? 'border-brand-accent bg-brand-accent text-brand-black'
+                    'font-black text-[9px] tracking-[0.25em] uppercase px-4 py-2.5 border transition-all duration-150',
+                    selectedSize === sz
+                      ? 'border-brand-lime bg-brand-lime text-brand-black'
                       : 'border-brand-gray-800 text-brand-gray-500 hover:border-brand-gray-600 hover:text-brand-white'
                   )}
                 >
-                  {size}
+                  {sz}
                 </button>
               ))}
             </div>
-            {error && <p className="text-red-400 text-[10px] mt-2 font-bold">{error}</p>}
+            {error && <p className="font-bold text-[9px] text-red-400 mt-2">{error}</p>}
           </div>
 
+          {/* CTA — no border-radius, lime when normal, white when added */}
           <button
-            onClick={handleAddToCart}
+            onClick={handleAdd}
             className={cn(
-              'w-full py-4 text-[10px] font-black tracking-[0.4em] uppercase transition-all duration-150',
-              added ? 'bg-green-400 text-brand-black' : 'bg-brand-accent text-brand-black hover:bg-white'
+              'w-full py-4 font-black text-[9px] tracking-[0.5em] uppercase transition-all duration-200 mt-2',
+              added
+                ? 'bg-brand-white text-brand-black'
+                : 'bg-brand-lime text-brand-black hover:bg-brand-white'
             )}
           >
-            {added ? '✓ Added to Bag' : 'Add to Bag'}
+            {added ? '✓ ADDED' : 'ADD TO BAG'}
           </button>
 
-          <div className="pt-2 border-t border-brand-gray-800 space-y-1.5">
-            <p className="text-[10px] text-brand-gray-700 font-bold">→ Ships worldwide · ~2 week delivery</p>
-            <p className="text-[10px] text-brand-gray-700 font-bold">→ Secure checkout via Stripe</p>
+          {/* Micro details */}
+          <div className="pt-2 border-t border-brand-gray-800 space-y-1">
+            <p className="font-bold text-[9px] tracking-[0.2em] text-brand-gray-700">→ Ships worldwide · ~2 weeks</p>
+            <p className="font-bold text-[9px] tracking-[0.2em] text-brand-gray-700">→ Secure checkout via Stripe</p>
           </div>
         </div>
       </div>

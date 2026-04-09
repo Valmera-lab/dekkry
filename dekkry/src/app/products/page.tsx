@@ -1,83 +1,85 @@
 import { getAllProducts } from '@/lib/products-db';
-import { getAverageRating, getReviewsByProduct } from '@/lib/reviews-db';
-import { ProductCard } from '@/components/product/ProductCard';
 import { Product } from '@/types';
+import Image from 'next/image';
+import Link from 'next/link';
 
 export const revalidate = 3600;
 
-const CATEGORIES = ['all', 'tops', 'bottoms', 'outerwear', 'accessories'];
+const CATS = ['all', 'tops', 'bottoms', 'outerwear', 'accessories'];
 
 interface Props {
-  searchParams: { category?: string; sort?: string };
+  searchParams: { category?: string };
 }
 
 export default function ProductsPage({ searchParams }: Props) {
-  const category = searchParams.category || 'all';
-  const sort = searchParams.sort || 'newest';
-
+  const cat = searchParams.category || 'all';
   let products: Product[] = getAllProducts();
-
-  if (category !== 'all') {
-    products = products.filter((p) => p.category === category);
-  }
-
-  if (sort === 'price-asc') products.sort((a, b) => a.price - b.price);
-  else if (sort === 'price-desc') products.sort((a, b) => b.price - a.price);
+  if (cat !== 'all') products = products.filter((p) => p.category === cat);
 
   return (
     <div className="bg-brand-black min-h-screen">
 
-      {/* Header — edge to edge */}
-      <div className="px-5 sm:px-8 pt-10 pb-8 border-b border-brand-gray-800">
-        <p className="text-[9px] font-black tracking-[0.5em] uppercase text-brand-gray-600 mb-3">SS25</p>
+      {/* Header */}
+      <div className="px-5 sm:px-8 pt-8 pb-6 border-b border-brand-gray-800">
+        <p className="font-bold text-[8px] tracking-[0.6em] uppercase text-brand-gray-700 mb-2">SS25</p>
         <h1
           className="font-black tracking-[-0.04em] leading-none text-brand-white"
-          style={{ fontSize: 'clamp(52px, 12vw, 120px)' }}
+          style={{ fontSize: 'clamp(48px, 11vw, 120px)' }}
         >
           Shop
         </h1>
       </div>
 
-      {/* Filters — tight, inline */}
-      <div className="px-5 sm:px-8 py-5 border-b border-brand-gray-800 flex items-center gap-1 overflow-x-auto no-scrollbar">
-        {CATEGORIES.map((cat) => (
+      {/* Filter tabs — no borders, just text */}
+      <div className="px-5 sm:px-8 py-4 border-b border-brand-gray-800 flex items-center gap-5 overflow-x-auto no-scrollbar">
+        {CATS.map((c) => (
           <a
-            key={cat}
-            href={`/products${cat !== 'all' ? `?category=${cat}` : ''}`}
-            className={`flex-shrink-0 text-[9px] font-black tracking-[0.3em] uppercase px-4 py-2 transition-colors duration-150 ${
-              category === cat
-                ? 'bg-brand-accent text-brand-black'
-                : 'text-brand-gray-600 hover:text-brand-white'
+            key={c}
+            href={`/products${c !== 'all' ? `?category=${c}` : ''}`}
+            className={`flex-shrink-0 font-black text-[9px] tracking-[0.4em] uppercase transition-colors duration-150 ${
+              cat === c ? 'text-brand-lime' : 'text-brand-gray-600 hover:text-brand-white'
             }`}
           >
-            {cat}
+            {c}
           </a>
         ))}
-        <span className="ml-auto pl-6 text-[9px] font-black tracking-[0.3em] uppercase text-brand-gray-700 flex-shrink-0">
+        <span className="ml-auto flex-shrink-0 font-bold text-[8px] tracking-[0.4em] uppercase text-brand-gray-800">
           {products.length} items
         </span>
       </div>
 
-      {/* Grid — edge to edge, 1px gap creates the grid lines */}
+      {/* Grid — pure photos, 1px separators */}
       {products.length > 0 ? (
-        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-px bg-brand-gray-800">
-          {products.map((product, index) => (
-            <div key={product.id} className="bg-brand-black">
-              <ProductCard
-                product={product}
-                averageRating={getAverageRating(product.id)}
-                reviewCount={getReviewsByProduct(product.id).length}
-                priority={index < 4}
-                variant="grid"
+        <div
+          className="grid grid-cols-2 lg:grid-cols-4"
+          style={{ gap: '1px', background: '#1c1a18' }}
+        >
+          {products.map((p, i) => (
+            <Link
+              key={p.id}
+              href={`/products/${p.id}`}
+              className="relative bg-brand-black group overflow-hidden block"
+              style={{ aspectRatio: '3/4' }}
+            >
+              <Image
+                src={p.variants[0]?.images?.[0] ?? p.images[0]}
+                alt={p.name}
+                fill
+                sizes="(max-width: 1024px) 50vw, 25vw"
+                className="object-cover transition-transform duration-700 group-hover:scale-[1.05]"
+                loading={i < 4 ? 'eager' : 'lazy'}
               />
-            </div>
+              <div className="absolute inset-0 bg-brand-black/0 group-hover:bg-brand-black/55 transition-all duration-300" />
+              <div className="absolute bottom-0 left-0 right-0 translate-y-full group-hover:translate-y-0 transition-transform duration-300 p-4">
+                <p className="font-black text-[9px] tracking-[0.2em] uppercase text-brand-white leading-tight">{p.name}</p>
+                <p className="font-bold text-[9px] text-brand-lime mt-0.5">${p.price}</p>
+              </div>
+            </Link>
           ))}
         </div>
       ) : (
         <div className="flex items-center justify-center py-32">
-          <p className="text-[10px] font-black tracking-[0.4em] uppercase text-brand-gray-700">
-            Nothing here yet
-          </p>
+          <p className="font-black text-[9px] tracking-[0.5em] uppercase text-brand-gray-700">Nothing yet</p>
         </div>
       )}
     </div>

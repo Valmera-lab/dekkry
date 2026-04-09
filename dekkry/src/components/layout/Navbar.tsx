@@ -1,85 +1,101 @@
 'use client';
 import Link from 'next/link';
 import { useCartStore } from '@/lib/cart-store';
-import { useState } from 'react';
-import { cn } from '@/lib/utils';
+import { useState, useEffect } from 'react';
 
 export function Navbar() {
   const totalItems = useCartStore((s) => s.totalItems());
-  const [menuOpen, setMenuOpen] = useState(false);
+  const [open, setOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 60);
+    window.addEventListener('scroll', onScroll, { passive: true });
+    return () => window.removeEventListener('scroll', onScroll);
+  }, []);
 
   return (
     <>
-      <nav className="fixed top-0 left-0 right-0 z-50 mix-blend-difference">
-        <div className="flex items-center justify-between px-5 sm:px-8 h-12">
+      {/* NAV — absolutely minimal, sits over hero */}
+      <nav
+        className={`fixed top-0 left-0 right-0 z-50 transition-colors duration-300 ${
+          scrolled ? 'bg-brand-black/95 backdrop-blur-sm' : 'bg-transparent'
+        }`}
+      >
+        <div className="flex items-center justify-between px-5 sm:px-8 h-11">
+          {/* Logo */}
           <Link
             href="/"
-            className="text-sm font-black tracking-[0.15em] text-white uppercase hover:opacity-70 transition-opacity"
+            className="font-black text-[13px] tracking-[0.18em] text-brand-white uppercase leading-none"
+            onClick={() => setOpen(false)}
           >
             DEKKRY
           </Link>
 
-          <div className="hidden md:flex items-center gap-10">
-            {[
-              { href: '/products', label: 'Shop' },
-              { href: '/about', label: 'About' },
-              { href: '/shipping', label: 'Shipping' },
-            ].map((l) => (
-              <Link
-                key={l.href}
-                href={l.href}
-                className="text-[10px] font-bold tracking-[0.3em] uppercase text-white hover:opacity-60 transition-opacity"
-              >
-                {l.label}
-              </Link>
-            ))}
-          </div>
-
-          <div className="flex items-center gap-5">
-            <Link href="/cart" className="relative text-white hover:opacity-60 transition-opacity">
-              <span className="text-[10px] font-bold tracking-[0.3em] uppercase">
-                Bag{totalItems > 0 ? ` (${totalItems})` : ''}
-              </span>
+          {/* Right side: bag + menu toggle */}
+          <div className="flex items-center gap-6">
+            <Link
+              href="/cart"
+              className="font-bold text-[9px] tracking-[0.35em] uppercase text-brand-gray-400 hover:text-brand-white transition-colors"
+            >
+              {totalItems > 0 ? `BAG (${totalItems})` : 'BAG'}
             </Link>
             <button
-              onClick={() => setMenuOpen(!menuOpen)}
-              className="md:hidden text-white text-[10px] font-bold tracking-[0.3em] uppercase"
+              onClick={() => setOpen(!open)}
+              className="font-bold text-[9px] tracking-[0.35em] uppercase text-brand-gray-400 hover:text-brand-white transition-colors"
             >
-              {menuOpen ? 'Close' : 'Menu'}
+              {open ? 'CLOSE' : 'MENU'}
             </button>
           </div>
         </div>
       </nav>
 
-      {/* Mobile fullscreen menu */}
-      <div className={cn(
-        'fixed inset-0 z-40 bg-brand-black flex flex-col justify-between p-8 transition-all duration-500',
-        menuOpen ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'
-      )}>
-        <div className="flex justify-between items-start pt-14">
-          <div className="space-y-2">
-            {[
-              { href: '/products', label: 'Shop' },
-              { href: '/about', label: 'About' },
-              { href: '/shipping', label: 'Shipping' },
-              { href: '/cart', label: 'Bag' },
-            ].map((l) => (
-              <div key={l.href}>
-                <Link
-                  href={l.href}
-                  onClick={() => setMenuOpen(false)}
-                  className="block text-[56px] leading-[1.05] font-black tracking-[-0.03em] text-brand-white hover:text-brand-accent transition-colors"
-                >
-                  {l.label}
-                </Link>
-              </div>
-            ))}
-          </div>
+      {/* FULLSCREEN MENU — Corteiz-style */}
+      <div
+        className={`fixed inset-0 z-40 bg-brand-black flex flex-col transition-all duration-500 ${
+          open ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'
+        }`}
+      >
+        {/* Top row */}
+        <div className="flex items-center justify-between px-5 sm:px-8 h-11 mt-0">
+          <span className="font-black text-[13px] tracking-[0.18em] text-brand-white uppercase">DEKKRY</span>
+          <button
+            onClick={() => setOpen(false)}
+            className="font-bold text-[9px] tracking-[0.35em] uppercase text-brand-gray-500"
+          >
+            CLOSE
+          </button>
         </div>
-        <p className="text-[10px] font-bold tracking-[0.35em] uppercase text-brand-gray-600">DEKKRY SS25</p>
+
+        {/* Nav links — huge, left-aligned, touching bottom */}
+        <div className="flex-1 flex flex-col justify-end px-5 sm:px-8 pb-16 gap-0">
+          {[
+            { href: '/products', label: 'Shop' },
+            { href: '/about', label: 'About' },
+            { href: '/shipping', label: 'Shipping' },
+            { href: '/cart', label: totalItems > 0 ? `Bag (${totalItems})` : 'Bag' },
+          ].map((l) => (
+            <Link
+              key={l.href}
+              href={l.href}
+              onClick={() => setOpen(false)}
+              className="block font-black leading-[0.9] tracking-[-0.04em] text-brand-white hover:text-brand-lime transition-colors duration-150"
+              style={{ fontSize: 'clamp(64px, 14vw, 160px)' }}
+            >
+              {l.label}
+            </Link>
+          ))}
+        </div>
+
+        {/* Bottom strip */}
+        <div className="px-5 sm:px-8 pb-8 flex items-center justify-between">
+          <span className="font-bold text-[9px] tracking-[0.4em] uppercase text-brand-gray-700">SS25 Collection</span>
+          <span className="font-bold text-[9px] tracking-[0.4em] uppercase text-brand-gray-700">Ships Worldwide</span>
+        </div>
       </div>
 
-      <div className="h-12" />
+      {/* Spacer — only on non-hero pages */}
+      <div className="h-11 bg-brand-black" />
     </>
   );
 }
