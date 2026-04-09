@@ -21,7 +21,7 @@ export default function AboutPage() {
       {/* Story */}
       <section className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-24">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-16 items-start">
-          <div className="sticky top-24">
+          <div className="md:sticky md:top-24">
             <div className="text-xs font-semibold tracking-[0.4em] text-brand-gray-400 uppercase mb-4">The Story</div>
             <h2 className="text-4xl font-black tracking-tight text-brand-black leading-tight">
               Started from a feeling,<br />not a formula.
@@ -50,17 +50,17 @@ export default function AboutPage() {
               {
                 number: '01',
                 title: 'Real Quality',
-                desc: 'Every piece is checked before it reaches you. We don\'t do "good enough." Either it\'s right or it doesn\'t ship.'
+                desc: "Every piece is checked before it reaches you. We don't do \"good enough.\" Either it's right or it doesn't ship."
               },
               {
                 number: '02',
                 title: 'No Fluff',
-                desc: 'We keep it clean. No gimmicks, no forced collabs, no limited drops just for the sake of hype. Just good clothing.'
+                desc: "We keep it clean. No gimmicks, no forced collabs, no limited drops just for the sake of hype. Just good clothing."
               },
               {
                 number: '03',
                 title: 'Built to Last',
-                desc: 'Fast fashion is a waste of everyone\'s time and money. We build pieces you\'ll still be rocking in two years.'
+                desc: "Fast fashion is a waste of everyone's time and money. We build pieces you'll still be rocking in two years."
               },
             ].map((v) => (
               <div key={v.number}>

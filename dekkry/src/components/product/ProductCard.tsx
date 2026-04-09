@@ -11,9 +11,10 @@ interface Props {
   product: Product;
   averageRating?: number;
   reviewCount?: number;
+  priority?: boolean;
 }
 
-export function ProductCard({ product, averageRating, reviewCount }: Props) {
+export function ProductCard({ product, averageRating, reviewCount, priority = false }: Props) {
   const [hovered, setHovered] = useState(false);
   const secondImg = product.images[1] || product.images[0];
 
@@ -32,6 +33,8 @@ export function ProductCard({ product, averageRating, reviewCount }: Props) {
             fill
             className="object-cover transition-all duration-500 group-hover:scale-105"
             sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw"
+            priority={priority}
+            loading={priority ? 'eager' : 'lazy'}
           />
           {/* Quick add overlay */}
           <div className="absolute bottom-0 left-0 right-0 bg-brand-black/90 py-3 px-4 translate-y-full group-hover:translate-y-0 transition-transform duration-300 flex items-center justify-center gap-2">
@@ -53,7 +56,6 @@ export function ProductCard({ product, averageRating, reviewCount }: Props) {
           <h3 className="text-xs font-semibold tracking-wider uppercase text-brand-black mb-1 line-clamp-1">
             {product.name}
           </h3>
-          {/* Rating */}
           {averageRating !== undefined && reviewCount !== undefined && reviewCount > 0 && (
             <div className="flex items-center gap-1.5 mb-1.5">
               <StarRating rating={averageRating} size={11} />
