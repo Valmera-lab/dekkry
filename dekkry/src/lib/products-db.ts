@@ -1,6 +1,5 @@
 import { Product } from '@/types';
 
-// Static import — bundled at build time, zero runtime I/O
 const products: Product[] = [
   // ── ORIGINAL 8 ───────────────────────────────────────────────────────────
   {
@@ -116,17 +115,16 @@ const products: Product[] = [
     category: 'tops', featured: false, createdAt: '2025-01-01T00:00:00.000Z',
   },
 
-  // ── NEW PRODUCTS (p9–p23) ─────────────────────────────────────────────────
+  // ── NEW PRODUCTS p9–p23 (unique AI images) ────────────────────────────────
   {
     id: 'p9',
     name: 'DEKKRY FLEECE HOODIE',
     description: 'Thick fleece-lined hoodie. American retro silhouette, oversized fit, kangaroo pocket. Drop-shoulder construction.',
     price: 55,
-    images: ['https://media.base44.com/images/public/69d65ddb96ea190c515ae882/75d2ba4d8_generated_image.png'],
+    images: ['https://media.base44.com/images/public/69d65ddb96ea190c515ae882/4a973e419_generated_image.png'],
     sizes: ['M', 'L', 'XL', '2XL', '3XL'],
     variants: [
-      { color: 'Black', colorHex: '#0a0a0a', sizes: ['M', 'L', 'XL', '2XL', '3XL'], images: ['https://media.base44.com/images/public/69d65ddb96ea190c515ae882/75d2ba4d8_generated_image.png'] },
-      { color: 'Grey', colorHex: '#888888', sizes: ['M', 'L', 'XL', '2XL', '3XL'], images: ['https://media.base44.com/images/public/69d65ddb96ea190c515ae882/7399309fc_generated_image.png'] },
+      { color: 'Black', colorHex: '#0a0a0a', sizes: ['M', 'L', 'XL', '2XL', '3XL'], images: ['https://media.base44.com/images/public/69d65ddb96ea190c515ae882/4a973e419_generated_image.png'] },
     ],
     sourceUrl: 'https://mulebuy.com/product?id=889327218148&platform=TAOBAO',
     category: 'tops', featured: false, createdAt: '2025-02-01T00:00:00.000Z',
@@ -136,11 +134,10 @@ const products: Product[] = [
     name: 'DEKKRY CARGO PANTS',
     description: 'Heavyweight pure cotton cargo pants. Multi-pocket utility build, drawstring waist, tapered ankle. Built for movement.',
     price: 52,
-    images: ['https://media.base44.com/images/public/69d65ddb96ea190c515ae882/2965b1241_generated_image.png'],
+    images: ['https://media.base44.com/images/public/69d65ddb96ea190c515ae882/516cec68e_generated_image.png'],
     sizes: ['M', 'L', 'XL', '2XL', '3XL'],
     variants: [
-      { color: 'Black', colorHex: '#0a0a0a', sizes: ['M', 'L', 'XL', '2XL', '3XL'], images: ['https://media.base44.com/images/public/69d65ddb96ea190c515ae882/2965b1241_generated_image.png'] },
-      { color: 'Khaki', colorHex: '#c3b091', sizes: ['M', 'L', 'XL', '2XL', '3XL'], images: ['https://media.base44.com/images/public/69d65ddb96ea190c515ae882/59f3fc4d1_generated_image.png'] },
+      { color: 'Black', colorHex: '#0a0a0a', sizes: ['M', 'L', 'XL', '2XL', '3XL'], images: ['https://media.base44.com/images/public/69d65ddb96ea190c515ae882/516cec68e_generated_image.png'] },
     ],
     sourceUrl: 'https://mulebuy.com/product?id=904533023547&platform=TAOBAO',
     category: 'bottoms', featured: false, createdAt: '2025-02-01T00:00:00.000Z',
@@ -150,12 +147,10 @@ const products: Product[] = [
     name: 'DEKKRY SPORTS STRIPE TEE',
     description: 'Korean-style pure cotton tee. Three-stripe raglan sleeves, chest badge graphic. Unisex heavyweight top.',
     price: 35,
-    images: ['https://media.base44.com/images/public/69d65ddb96ea190c515ae882/0797a93e1_generated_image.png'],
+    images: ['https://media.base44.com/images/public/69d65ddb96ea190c515ae882/a6cf0e310_generated_image.png'],
     sizes: ['S', 'M', 'L', 'XL', '2XL', '3XL'],
     variants: [
-      { color: 'Black/White', colorHex: '#0a0a0a', sizes: ['S', 'M', 'L', 'XL', '2XL', '3XL'], images: ['https://media.base44.com/images/public/69d65ddb96ea190c515ae882/0797a93e1_generated_image.png'] },
-      { color: 'White/Black', colorHex: '#f5f5f5', sizes: ['S', 'M', 'L', 'XL', '2XL', '3XL'], images: ['https://media.base44.com/images/public/69d65ddb96ea190c515ae882/a0943634e_generated_image.png'] },
-      { color: 'Navy/Grey', colorHex: '#1a2744', sizes: ['S', 'M', 'L', 'XL', '2XL', '3XL'], images: ['https://media.base44.com/images/public/69d65ddb96ea190c515ae882/541c96dbe_generated_image.png'] },
+      { color: 'Black/White', colorHex: '#0a0a0a', sizes: ['S', 'M', 'L', 'XL', '2XL', '3XL'], images: ['https://media.base44.com/images/public/69d65ddb96ea190c515ae882/a6cf0e310_generated_image.png'] },
     ],
     sourceUrl: 'https://mulebuy.com/product?id=887560658574&platform=TAOBAO',
     category: 'tops', featured: false, createdAt: '2025-02-01T00:00:00.000Z',
@@ -165,11 +160,10 @@ const products: Product[] = [
     name: '404 DEKKRY GRAPHIC TEE',
     description: '"4o4Dekkry / Melancholy" heavyweight cotton tee. American-style unisex fit, oversized drop-shoulder cut.',
     price: 32,
-    images: ['https://media.base44.com/images/public/69d65ddb96ea190c515ae882/0797a93e1_generated_image.png'],
+    images: ['https://media.base44.com/images/public/69d65ddb96ea190c515ae882/409afe135_generated_image.png'],
     sizes: ['S', 'M', 'L', 'XL', '2XL', '3XL'],
     variants: [
-      { color: 'Black', colorHex: '#0a0a0a', sizes: ['S', 'M', 'L', 'XL', '2XL', '3XL'], images: ['https://media.base44.com/images/public/69d65ddb96ea190c515ae882/0797a93e1_generated_image.png'] },
-      { color: 'White', colorHex: '#f5f5f5', sizes: ['S', 'M', 'L', 'XL', '2XL', '3XL'], images: ['https://media.base44.com/images/public/69d65ddb96ea190c515ae882/a0943634e_generated_image.png'] },
+      { color: 'Black', colorHex: '#0a0a0a', sizes: ['S', 'M', 'L', 'XL', '2XL', '3XL'], images: ['https://media.base44.com/images/public/69d65ddb96ea190c515ae882/409afe135_generated_image.png'] },
     ],
     sourceUrl: 'https://mulebuy.com/product?id=913077954029&platform=TAOBAO',
     category: 'tops', featured: true, createdAt: '2025-02-01T00:00:00.000Z',
@@ -179,11 +173,10 @@ const products: Product[] = [
     name: 'DEKKRY PATCHWORK TEE',
     description: 'Pure cotton patchwork tee with contrast white piping. DEKKRY. chest logo. Relaxed oversized silhouette.',
     price: 34,
-    images: ['https://media.base44.com/images/public/69d65ddb96ea190c515ae882/0797a93e1_generated_image.png'],
+    images: ['https://media.base44.com/images/public/69d65ddb96ea190c515ae882/ab987093a_generated_image.png'],
     sizes: ['S', 'M', 'L', 'XL', '2XL', '3XL'],
     variants: [
-      { color: 'Black', colorHex: '#0a0a0a', sizes: ['S', 'M', 'L', 'XL', '2XL', '3XL'], images: ['https://media.base44.com/images/public/69d65ddb96ea190c515ae882/0797a93e1_generated_image.png'] },
-      { color: 'Navy', colorHex: '#1a2744', sizes: ['S', 'M', 'L', 'XL', '2XL', '3XL'], images: ['https://media.base44.com/images/public/69d65ddb96ea190c515ae882/541c96dbe_generated_image.png'] },
+      { color: 'Black', colorHex: '#0a0a0a', sizes: ['S', 'M', 'L', 'XL', '2XL', '3XL'], images: ['https://media.base44.com/images/public/69d65ddb96ea190c515ae882/ab987093a_generated_image.png'] },
     ],
     sourceUrl: 'https://mulebuy.com/product?id=910779713274&platform=TAOBAO',
     category: 'tops', featured: false, createdAt: '2025-02-01T00:00:00.000Z',
@@ -193,12 +186,10 @@ const products: Product[] = [
     name: 'DEKKRYINFV WASHED HOODIE',
     description: '"DEKKRYINFV / Every Little Helps" — acid-washed heavyweight hoodie. Batik-dyed niche design, unisex couple-fit silhouette.',
     price: 62,
-    images: ['https://media.base44.com/images/public/69d65ddb96ea190c515ae882/75d2ba4d8_generated_image.png'],
+    images: ['https://media.base44.com/images/public/69d65ddb96ea190c515ae882/fa491c574_generated_image.png'],
     sizes: ['M', 'L', 'XL', '2XL', '3XL'],
     variants: [
-      { color: 'Pink Wash', colorHex: '#e8b4b8', sizes: ['M', 'L', 'XL', '2XL', '3XL'], images: ['https://media.base44.com/images/public/69d65ddb96ea190c515ae882/75d2ba4d8_generated_image.png'] },
-      { color: 'Grey Wash', colorHex: '#a0a0a0', sizes: ['M', 'L', 'XL', '2XL', '3XL'], images: ['https://media.base44.com/images/public/69d65ddb96ea190c515ae882/7399309fc_generated_image.png'] },
-      { color: 'Black Wash', colorHex: '#1a1a1a', sizes: ['M', 'L', 'XL', '2XL', '3XL'], images: ['https://media.base44.com/images/public/69d65ddb96ea190c515ae882/b5c4ee726_generated_image.png'] },
+      { color: 'Pink Wash', colorHex: '#e8b4b8', sizes: ['M', 'L', 'XL', '2XL', '3XL'], images: ['https://media.base44.com/images/public/69d65ddb96ea190c515ae882/fa491c574_generated_image.png'] },
     ],
     sourceUrl: 'https://mulebuy.com/product?id=1006200446563&platform=TAOBAO',
     category: 'tops', featured: true, createdAt: '2025-02-01T00:00:00.000Z',
@@ -208,11 +199,10 @@ const products: Product[] = [
     name: 'DEKKRY MINIMAL CREWNECK',
     description: 'Pure cotton crewneck sweatshirt. Minimal DEKKRY logo. Clean American-style streetwear silhouette.',
     price: 42,
-    images: ['https://media.base44.com/images/public/69d65ddb96ea190c515ae882/fe59432be_generated_image.png'],
+    images: ['https://media.base44.com/images/public/69d65ddb96ea190c515ae882/9ff760236_generated_image.png'],
     sizes: ['M', 'L', 'XL', '2XL', '3XL'],
     variants: [
-      { color: 'White', colorHex: '#f5f5f5', sizes: ['M', 'L', 'XL', '2XL', '3XL'], images: ['https://media.base44.com/images/public/69d65ddb96ea190c515ae882/fe59432be_generated_image.png'] },
-      { color: 'Black', colorHex: '#0a0a0a', sizes: ['M', 'L', 'XL', '2XL', '3XL'], images: ['https://media.base44.com/images/public/69d65ddb96ea190c515ae882/b5c4ee726_generated_image.png'] },
+      { color: 'White', colorHex: '#f5f5f5', sizes: ['M', 'L', 'XL', '2XL', '3XL'], images: ['https://media.base44.com/images/public/69d65ddb96ea190c515ae882/9ff760236_generated_image.png'] },
     ],
     sourceUrl: 'https://mulebuy.com/product?id=962737887126&platform=TAOBAO',
     category: 'tops', featured: false, createdAt: '2025-02-01T00:00:00.000Z',
@@ -222,11 +212,10 @@ const products: Product[] = [
     name: 'DK PATCH GRAPHIC TEE',
     description: 'Pure cotton tee with DK varsity patch and Dekkry fashion slogan print. American collegiate streetwear energy.',
     price: 30,
-    images: ['https://media.base44.com/images/public/69d65ddb96ea190c515ae882/a0943634e_generated_image.png'],
+    images: ['https://media.base44.com/images/public/69d65ddb96ea190c515ae882/9676cb501_generated_image.png'],
     sizes: ['S', 'M', 'L', 'XL', '2XL', '3XL'],
     variants: [
-      { color: 'Grey', colorHex: '#c0bdb8', sizes: ['S', 'M', 'L', 'XL', '2XL', '3XL'], images: ['https://media.base44.com/images/public/69d65ddb96ea190c515ae882/a0943634e_generated_image.png'] },
-      { color: 'Blue', colorHex: '#4a6fa5', sizes: ['S', 'M', 'L', 'XL', '2XL', '3XL'], images: ['https://media.base44.com/images/public/69d65ddb96ea190c515ae882/541c96dbe_generated_image.png'] },
+      { color: 'Grey', colorHex: '#c0bdb8', sizes: ['S', 'M', 'L', 'XL', '2XL', '3XL'], images: ['https://media.base44.com/images/public/69d65ddb96ea190c515ae882/9676cb501_generated_image.png'] },
     ],
     sourceUrl: 'https://mulebuy.com/product?id=912802087288&platform=TAOBAO',
     category: 'tops', featured: false, createdAt: '2025-02-01T00:00:00.000Z',
@@ -236,11 +225,10 @@ const products: Product[] = [
     name: 'THEDEKKRY® STRIPE TEE',
     description: 'TheDekkry® fashion — pure cotton tee with contrast three-stripe sleeves. Navy/grey colourblock. Unisex, couple-wear.',
     price: 34,
-    images: ['https://media.base44.com/images/public/69d65ddb96ea190c515ae882/8678bd189_generated_image.png'],
+    images: ['https://media.base44.com/images/public/69d65ddb96ea190c515ae882/8181ace67_generated_image.png'],
     sizes: ['S', 'M', 'L', 'XL', '2XL', '3XL'],
     variants: [
-      { color: 'Navy/Grey', colorHex: '#1a2744', sizes: ['S', 'M', 'L', 'XL', '2XL', '3XL'], images: ['https://media.base44.com/images/public/69d65ddb96ea190c515ae882/8678bd189_generated_image.png'] },
-      { color: 'Black/White', colorHex: '#0a0a0a', sizes: ['S', 'M', 'L', 'XL', '2XL', '3XL'], images: ['https://media.base44.com/images/public/69d65ddb96ea190c515ae882/0797a93e1_generated_image.png'] },
+      { color: 'Navy/Grey', colorHex: '#1a2744', sizes: ['S', 'M', 'L', 'XL', '2XL', '3XL'], images: ['https://media.base44.com/images/public/69d65ddb96ea190c515ae882/8181ace67_generated_image.png'] },
     ],
     sourceUrl: 'https://mulebuy.com/product?id=886882452912&platform=TAOBAO',
     category: 'tops', featured: false, createdAt: '2025-02-01T00:00:00.000Z',
@@ -250,12 +238,10 @@ const products: Product[] = [
     name: '81DEKKRY SLOGAN TEE',
     description: '"81Dekkry — Happiness depends upon ourselves." American high-street pure cotton tee. Loose oversized fit, statement print.',
     price: 30,
-    images: ['https://media.base44.com/images/public/69d65ddb96ea190c515ae882/0797a93e1_generated_image.png'],
+    images: ['https://media.base44.com/images/public/69d65ddb96ea190c515ae882/364b4769a_generated_image.png'],
     sizes: ['S', 'M', 'L', 'XL', '2XL', '3XL'],
     variants: [
-      { color: 'Black', colorHex: '#0a0a0a', sizes: ['S', 'M', 'L', 'XL', '2XL', '3XL'], images: ['https://media.base44.com/images/public/69d65ddb96ea190c515ae882/0797a93e1_generated_image.png'] },
-      { color: 'Navy', colorHex: '#1a2744', sizes: ['S', 'M', 'L', 'XL', '2XL', '3XL'], images: ['https://media.base44.com/images/public/69d65ddb96ea190c515ae882/541c96dbe_generated_image.png'] },
-      { color: 'Burgundy', colorHex: '#6e1423', sizes: ['S', 'M', 'L', 'XL', '2XL', '3XL'], images: ['https://media.base44.com/images/public/69d65ddb96ea190c515ae882/5a90552d1_generated_image.png'] },
+      { color: 'Black', colorHex: '#0a0a0a', sizes: ['S', 'M', 'L', 'XL', '2XL', '3XL'], images: ['https://media.base44.com/images/public/69d65ddb96ea190c515ae882/364b4769a_generated_image.png'] },
     ],
     sourceUrl: 'https://mulebuy.com/product?id=887293479337&platform=TAOBAO',
     category: 'tops', featured: false, createdAt: '2025-02-01T00:00:00.000Z',
@@ -265,11 +251,10 @@ const products: Product[] = [
     name: 'DEKKRY #03 JERSEY TEE',
     description: 'dekkry patchwork jersey-style tee. "03" oversized number print, contrast navy trim. Pure cotton, breathable summer cut.',
     price: 40,
-    images: ['https://media.base44.com/images/public/69d65ddb96ea190c515ae882/0797a93e1_generated_image.png'],
+    images: ['https://media.base44.com/images/public/69d65ddb96ea190c515ae882/16757c499_generated_image.png'],
     sizes: ['S', 'M', 'L', 'XL', '2XL', '3XL'],
     variants: [
-      { color: 'White/Navy', colorHex: '#f5f5f5', sizes: ['S', 'M', 'L', 'XL', '2XL', '3XL'], images: ['https://media.base44.com/images/public/69d65ddb96ea190c515ae882/a0943634e_generated_image.png'] },
-      { color: 'Black/Grey', colorHex: '#0a0a0a', sizes: ['S', 'M', 'L', 'XL', '2XL', '3XL'], images: ['https://media.base44.com/images/public/69d65ddb96ea190c515ae882/0797a93e1_generated_image.png'] },
+      { color: 'White/Navy', colorHex: '#f5f5f5', sizes: ['S', 'M', 'L', 'XL', '2XL', '3XL'], images: ['https://media.base44.com/images/public/69d65ddb96ea190c515ae882/16757c499_generated_image.png'] },
     ],
     sourceUrl: 'https://mulebuy.com/product?id=964875364604&platform=TAOBAO',
     category: 'tops', featured: true, createdAt: '2025-02-01T00:00:00.000Z',
@@ -279,12 +264,10 @@ const products: Product[] = [
     name: 'DEKKRY GRAFFITI SHORTS',
     description: 'Hip-hop street sports shorts. DEKKRY graffiti script logo. Drawstring waist, five-point cut. Pure cotton.',
     price: 36,
-    images: ['https://media.base44.com/images/public/69d65ddb96ea190c515ae882/fbcfa3555_generated_image.png'],
+    images: ['https://media.base44.com/images/public/69d65ddb96ea190c515ae882/a35235346_generated_image.png'],
     sizes: ['M', 'L', 'XL', '2XL', '3XL'],
     variants: [
-      { color: 'Navy', colorHex: '#1a2744', sizes: ['M', 'L', 'XL', '2XL', '3XL'], images: ['https://media.base44.com/images/public/69d65ddb96ea190c515ae882/fbcfa3555_generated_image.png'] },
-      { color: 'Black', colorHex: '#0a0a0a', sizes: ['M', 'L', 'XL', '2XL', '3XL'], images: ['https://media.base44.com/images/public/69d65ddb96ea190c515ae882/14950445f_generated_image.png'] },
-      { color: 'Grey', colorHex: '#888888', sizes: ['M', 'L', 'XL', '2XL', '3XL'], images: ['https://media.base44.com/images/public/69d65ddb96ea190c515ae882/59f3fc4d1_generated_image.png'] },
+      { color: 'Navy', colorHex: '#1a2744', sizes: ['M', 'L', 'XL', '2XL', '3XL'], images: ['https://media.base44.com/images/public/69d65ddb96ea190c515ae882/a35235346_generated_image.png'] },
     ],
     sourceUrl: 'https://mulebuy.com/product?id=906658572471&platform=TAOBAO',
     category: 'bottoms', featured: false, createdAt: '2025-02-01T00:00:00.000Z',
@@ -294,12 +277,10 @@ const products: Product[] = [
     name: 'AGNUDEKKRY SCRIPT SHORTS',
     description: 'Loose five-point shorts with Agnudekkry cursive script. American-style high-end sports shorts. Unisex drawstring waist.',
     price: 36,
-    images: ['https://media.base44.com/images/public/69d65ddb96ea190c515ae882/14950445f_generated_image.png'],
+    images: ['https://media.base44.com/images/public/69d65ddb96ea190c515ae882/4a8db698d_generated_image.png'],
     sizes: ['M', 'L', 'XL', '2XL', '3XL'],
     variants: [
-      { color: 'Navy', colorHex: '#1a2744', sizes: ['M', 'L', 'XL', '2XL', '3XL'], images: ['https://media.base44.com/images/public/69d65ddb96ea190c515ae882/fbcfa3555_generated_image.png'] },
-      { color: 'Black', colorHex: '#0a0a0a', sizes: ['M', 'L', 'XL', '2XL', '3XL'], images: ['https://media.base44.com/images/public/69d65ddb96ea190c515ae882/14950445f_generated_image.png'] },
-      { color: 'White', colorHex: '#f5f5f5', sizes: ['M', 'L', 'XL', '2XL', '3XL'], images: ['https://media.base44.com/images/public/69d65ddb96ea190c515ae882/a0943634e_generated_image.png'] },
+      { color: 'Navy', colorHex: '#1a2744', sizes: ['M', 'L', 'XL', '2XL', '3XL'], images: ['https://media.base44.com/images/public/69d65ddb96ea190c515ae882/4a8db698d_generated_image.png'] },
     ],
     sourceUrl: 'https://mulebuy.com/product?id=911201764779&platform=TAOBAO',
     category: 'bottoms', featured: false, createdAt: '2025-02-01T00:00:00.000Z',
@@ -309,12 +290,10 @@ const products: Product[] = [
     name: 'DEKKRYAG LOGO SHORTS',
     description: 'High-end American-style sports shorts. DEKKRYAG block print. Loose five-point cut, drawstring waist. Couple wear.',
     price: 34,
-    images: ['https://media.base44.com/images/public/69d65ddb96ea190c515ae882/5a90552d1_generated_image.png'],
+    images: ['https://media.base44.com/images/public/69d65ddb96ea190c515ae882/f97225161_generated_image.png'],
     sizes: ['M', 'L', 'XL', '2XL', '3XL'],
     variants: [
-      { color: 'Grey', colorHex: '#c0bdb8', sizes: ['M', 'L', 'XL', '2XL', '3XL'], images: ['https://media.base44.com/images/public/69d65ddb96ea190c515ae882/59f3fc4d1_generated_image.png'] },
-      { color: 'Black', colorHex: '#0a0a0a', sizes: ['M', 'L', 'XL', '2XL', '3XL'], images: ['https://media.base44.com/images/public/69d65ddb96ea190c515ae882/14950445f_generated_image.png'] },
-      { color: 'Navy', colorHex: '#1a2744', sizes: ['M', 'L', 'XL', '2XL', '3XL'], images: ['https://media.base44.com/images/public/69d65ddb96ea190c515ae882/fbcfa3555_generated_image.png'] },
+      { color: 'Grey', colorHex: '#c0bdb8', sizes: ['M', 'L', 'XL', '2XL', '3XL'], images: ['https://media.base44.com/images/public/69d65ddb96ea190c515ae882/f97225161_generated_image.png'] },
     ],
     sourceUrl: 'https://mulebuy.com/product?id=918834762085&platform=TAOBAO',
     category: 'bottoms', featured: false, createdAt: '2025-02-01T00:00:00.000Z',
@@ -324,25 +303,17 @@ const products: Product[] = [
     name: 'DEKKRY RETRO FLEECE PULLOVER',
     description: 'American retro fleece-lined hooded sweatshirt. Thick heavyweight cotton, loose hip-hop fit. Autumn/winter essential.',
     price: 55,
-    images: ['https://media.base44.com/images/public/69d65ddb96ea190c515ae882/75d2ba4d8_generated_image.png'],
+    images: ['https://media.base44.com/images/public/69d65ddb96ea190c515ae882/417af553a_generated_image.png'],
     sizes: ['M', 'L', 'XL', '2XL', '3XL'],
     variants: [
-      { color: 'Black', colorHex: '#0a0a0a', sizes: ['M', 'L', 'XL', '2XL', '3XL'], images: ['https://media.base44.com/images/public/69d65ddb96ea190c515ae882/75d2ba4d8_generated_image.png'] },
-      { color: 'Grey', colorHex: '#888888', sizes: ['M', 'L', 'XL', '2XL', '3XL'], images: ['https://media.base44.com/images/public/69d65ddb96ea190c515ae882/7399309fc_generated_image.png'] },
-      { color: 'Cream', colorHex: '#f5f0e8', sizes: ['M', 'L', 'XL', '2XL', '3XL'], images: ['https://media.base44.com/images/public/69d65ddb96ea190c515ae882/fe59432be_generated_image.png'] },
+      { color: 'Black', colorHex: '#0a0a0a', sizes: ['M', 'L', 'XL', '2XL', '3XL'], images: ['https://media.base44.com/images/public/69d65ddb96ea190c515ae882/417af553a_generated_image.png'] },
     ],
     sourceUrl: 'https://mulebuy.com/product?id=919087290520&platform=TAOBAO',
     category: 'tops', featured: false, createdAt: '2025-02-01T00:00:00.000Z',
   },
 ];
 
-export function getAllProducts(): Product[] {
-  return products;
-}
-
-export function getProductById(id: string): Product | null {
-  return products.find((p) => p.id === id) ?? null;
-}
-
+export function getAllProducts(): Product[] { return products; }
+export function getProductById(id: string): Product | null { return products.find((p) => p.id === id) ?? null; }
 export function saveProduct(_product: Product): void {}
 export function deleteProduct(_id: string): void {}
