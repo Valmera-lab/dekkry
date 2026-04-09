@@ -25,7 +25,7 @@ export function ProductCard({ product, averageRating, reviewCount }: Props) {
         onMouseLeave={() => setHovered(false)}
       >
         {/* Image */}
-        <div className="relative aspect-[3/4] overflow-hidden bg-brand-gray-900 mb-3">
+        <div className="relative aspect-[3/4] overflow-hidden bg-brand-gray-100 mb-3">
           <Image
             src={hovered && product.images[1] ? secondImg : product.images[0]}
             alt={product.name}
@@ -36,7 +36,7 @@ export function ProductCard({ product, averageRating, reviewCount }: Props) {
           {/* Quick add overlay */}
           <div className="absolute bottom-0 left-0 right-0 bg-brand-black/90 py-3 px-4 translate-y-full group-hover:translate-y-0 transition-transform duration-300 flex items-center justify-center gap-2">
             <ShoppingBag size={14} className="text-brand-accent" />
-            <span className="text-xs font-semibold tracking-widest uppercase text-brand-white">
+            <span className="text-xs font-semibold tracking-widest uppercase text-brand-cream">
               Quick View
             </span>
           </div>
@@ -50,26 +50,26 @@ export function ProductCard({ product, averageRating, reviewCount }: Props) {
 
         {/* Info */}
         <div>
-          <h3 className="text-xs font-semibold tracking-wider uppercase text-brand-gray-200 mb-1 line-clamp-1">
+          <h3 className="text-xs font-semibold tracking-wider uppercase text-brand-black mb-1 line-clamp-1">
             {product.name}
           </h3>
           {/* Rating */}
           {averageRating !== undefined && reviewCount !== undefined && reviewCount > 0 && (
             <div className="flex items-center gap-1.5 mb-1.5">
               <StarRating rating={averageRating} size={11} />
-              <span className="text-[10px] text-brand-gray-500">({reviewCount})</span>
+              <span className="text-[10px] text-brand-gray-400">({reviewCount})</span>
             </div>
           )}
           <div className="flex items-center justify-between">
-            <span className="text-sm font-bold text-brand-white">
+            <span className="text-sm font-bold text-brand-black">
               {formatPrice(product.price)}
             </span>
             <div className="flex gap-1">
               {product.variants.slice(0, 3).map((v) => (
                 <div
                   key={v.color}
-                  className="w-3 h-3 rounded-full border border-brand-gray-700"
-                  style={{ backgroundColor: v.colorHex || '#333' }}
+                  className="w-3 h-3 rounded-full border border-brand-gray-300"
+                  style={{ backgroundColor: v.colorHex || '#888' }}
                   title={v.color}
                 />
               ))}
